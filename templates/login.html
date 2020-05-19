@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+<link rel="stylesheet" href="style.css">
+{% block content %}
+<div class="box">
+    <h2>Sign in</h2>
+    <p>Grivance Portal</p>
+    <form method="POST" action="">
+      <div class="inputBox">
+        <!-- <input type="email" name="email" required onkeyup="this.setAttribute('value', this.value);"  value=""> -->
+        <!-- <label>Username</label> -->
+        {{ form.username.label(class="form-control-label") }}
+        {{ form.username()}}
+      </div>
+      <div class="inputBox">
+            <input type="text" name="text" required onkeyup="this.setAttribute('value', this.value);" value="">
+            <label>Passward</label>
+          </div>
+      <input type="submit" name="sign-in" value="Sign In">
+    </form>
+  </div>
+
+{% endblock content %}
