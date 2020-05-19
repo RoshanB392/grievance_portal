@@ -2,6 +2,7 @@
 
 {% block content %}
 
+<div style="display: block; background-color: #a7a7a7;" class="box-register">
 <div class="content-section">
     <form method="POST" action="">
         {{ form.hidden_tag() }}
@@ -72,6 +73,7 @@
     <small class="text-muted">
         Already Have An Account? <a class="ml-2" href="{{ url_for('login') }}">Sign In</a>
     </small>
+</div>
 </div>
 
 {% endblock content %}
