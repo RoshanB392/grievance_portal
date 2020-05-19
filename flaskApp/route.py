@@ -9,6 +9,10 @@ from flaskApp.models import User, Grievance
 def home():
     return render_template('layout.html')
 
+@app.route("/about")
+def about():
+    return render_template('about.html')
+
 
 @app.route("/register", methods=['GET', 'POST'])
 def register():
