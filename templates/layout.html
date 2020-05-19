@@ -24,7 +24,7 @@
     
     <style>
         body {
-        background-color: #007bff;
+        background-color: #73a4d8;
         }
     </style>  
 </head>
@@ -34,7 +34,7 @@
     <header class="site-header">
         <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
             <div class="container">
-              <a class="navbar-brand mr-4" href="/">Flask Blog</a>
+              <a class="navbar-brand mr-4" href="/">Grievance Portal</a>
               <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
               </button>
@@ -54,7 +54,19 @@
     </header>
 
     <main role="main" class="container">
-    
+      <div class="row">
+        <div class="col-md-8">
+          {% with messages = get_flasked_messages(with categories=true) %}
+            {% if messages %}
+              {% for category, messages in messages %}
+                <div class="alert alert-{{ category }}">
+                  {{ messages }}
+                </div>
+              {% endfor %}
+            {% endif %}
+          {% endwith %}
+        </div>
+      </div>
         {%block content%}{% endblock content %}
     
     </main>
