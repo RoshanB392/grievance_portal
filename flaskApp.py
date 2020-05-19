@@ -23,15 +23,13 @@ def register():
 @app.route("/login", methods=['GET', 'POST'])
 def login():
     form = LoginForm()
-    if form.validate_on_submit():
-        if form.email.data == "robinbond2k18@gmail.com" and form.password.data == "robin":
-            flash('You have logged in successfully', 'success')
-            return redirect(url_for('home'))
-    else:
-        flash('Login Unsuccessful! Please check Username and Password.', 'danger')
-        return redirect(url_for('login'))
+    # if form.validate_on_submit():
+    #     if form.email.data == 'admin@grievance.com' and form.password.data == 'admin':
+    #         flash('You have been logged in!', 'success')
+    #         return redirect(url_for('home'))
+    #     else:
+    #         flash('Login Unsuccessful. Please check username and password', 'danger')
     return render_template('login.html', title='Login', form=form)
-
 
 if __name__ == "__main__":
     app.run(debug=True)
