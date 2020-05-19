@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Registration Form</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+  <style>
+    body {
+      background-color: #007bff;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container p-4 p-sm-5">
+
+    <div class="container rounded bg-light p-lg-5 p-3">
+
+      <h4 class="h2 text-center mt-3 mb-5">Registration Form</h4>
+
+      <form class="needs-validation" novalidate action="register.php" method="POST">
+
+        <!-- Name -->
+        <div class="form-row">
+          <div class="col-md-6 mb-3">
+            <label for="first_name">First Name</label>
+            <input type="text" class="form-control" id="first_name" name="fname" required>
+            <div class="invalid-feedback">
+              Please provide your first name.
+            </div>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="last_name">Last Name</label>
+            <input type="text" class="form-control" id="last_name" name="lname" required>
+            <div class="invalid-feedback">
+              Please provide your last name.
+            </div>
+          </div>
+        </div>
+
+        <!-- Contact -->
+        <div class="form-row">
+          <div class="col-md-6 mb-3">
+            <label for="email">E-mail</label>
+            <input type="email" class="form-control" id="email" name="email" required>
+            <div class="invalid-feedback">
+              Please provide your e-mail.
+            </div>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="phone_no">Phone No.</label>
+            <input type="tel" class="form-control" id="phone_no" pattern="[6-9]{1}[0-9]{9}" name="phone" required>
+            <div class="invalid-feedback">
+              Please provide your phone number.
+            </div>
+          </div>
+        </div>
+
+        <!-- ID Card -->
+        <div class="form-group">
+          <label for="id_card">ID Card</label>
+          <div class="custom-file mb-3">
+            <input type="file" class="custom-file-input" id="customFile" name="id_card" required>
+            <label class="custom-file-label">Choose File</label>
+            <div class="invalid-feedback">
+              Please provide your ID Card.
+            </div>
+          </div>
+        </div>
+
+        <!-- Registration Type -->
+        <div class="form-group">
+          <label for="event">Registration Type</label>
+          <select class="custom-select" id="registration_type" name="registration_type" onchange="displayForm(this)"
+            required>
+            <option selected disabled value="">Choose...</option>
+            <option value="self">&nbsp;&nbsp;&nbsp;&nbsp;Self</option>
+            <option value="group">&nbsp;&nbsp;&nbsp;&nbsp;Group</option>
+            <option value="corporate">&nbsp;&nbsp;&nbsp;&nbsp;Corporate</option>
+            <option value="others">&nbsp;&nbsp;&nbsp;&nbsp;Others</option>
+          </select>
+          <div class="invalid-feedback">
+            Please select Registration Type.
+          </div>
+        </div>
+
+        <!-- Number Of Tickets -->
+        <div class="form-group">
+
+          <div style="display: none;" id="self">
+            <label for="no_of_tickets">Number Of Tickets</label>
+            <input type="text" class="form-control" value="1" id="no_of_tickets" name="no_of_tickets" readonly>
+          </div>
+
+          <div style="display: none;" id="other">
+            <label for="no_of_tickets">Enter Number Of Tickets</label>
+            <input type="number" class="form-control" id="no_of_tickets" value="1" name="no_of_tickets" required>
+          </div>
+
+          <div class="invalid-feedback">
+            Please provide the Number Of Tickets.
+          </div>
+        </div>
+
+
+        <button class="col-12 btn btn-primary my-3" type="submit" value="sub" name="submit">Submit</button>
+      </form>
+
+    </div>
+  </div>
+
+
+
+
+  <script>
+    // Example starter JavaScript for disabling form submissions if there are invalid fields
+    (function () {
+      'use strict';
+      window.addEventListener('load', function () {
+        // Fetch all the forms we want to apply custom Bootstrap validation styles to
+        var forms = document.getElementsByClassName('needs-validation');
+        // Loop over them and prevent submission
+        var validation = Array.prototype.filter.call(forms, function (form) {
+          form.addEventListener('submit', function (event) {
+            if (form.checkValidity() === false) {
+              event.preventDefault();
+              event.stopPropagation();
+            }
+            form.classList.add('was-validated');
+          }, false);
+        });
+      }, false);
+    })();
+  </script>
+
+  <script>
+    // The following code is used to display the name of selected file to upload
+    $(".custom-file-input").on("change", function () {
+      var fileName = $(this).val().split("\\").pop();
+      $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+    });
+  </script>
+
+  <script>
+
+    // function displayForm(elem) {
+    //   if (elem.value == "self") {
+    //     document.getElementById('other').style.display = "none";
+    //     document.getElementById('self').style.display = "block";
+    //   }
+    //   else {
+    //     document.getElementById('self').style.display = "none";
+    //     document.getElementById('other').style.display = "block";
+    //   }
+    // }
+
+
+    function displayForm(elem) {
+      if (elem.value == "self") {
+        $("#other").hide();
+        $("#self").show();
+      } else {
+        $("#self").hide();
+        $("#other").show();
+      }
+    }
+
+  </script>
+
+
+
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+    integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
+    </script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+    </script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
+    </script>
+
+</body>
+
+</html>
