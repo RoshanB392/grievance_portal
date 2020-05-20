@@ -2,8 +2,8 @@
 
 {% block content %}
 
-<div style="display: block; background-color: #ffffff;" class="box-register">
-<!-- <div class="content-section"> -->
+<!-- <div style="display: block; background-color: #ffffff;" class="box-register"> -->
+<div class="content-section">
     <form method="POST" action="">
         {{ form.hidden_tag() }}
         <fieldset class="form-group">
@@ -68,12 +68,12 @@
         </div>
         
     </form>
-<!-- </div> -->
+</div>
 <div class="border-top pt-3">
     <small class="text-muted">
         Already Have An Account? <a class="ml-2" href="{{ url_for('login') }}">Sign In</a>
     </small>
 </div>
-</div>
+<!-- </div> -->
 
 {% endblock content %}
