@@ -3,7 +3,7 @@ import secrets
 from PIL import Image
 from flask import render_template, flash, redirect, url_for, request
 from flaskApp import app, bcrypt , db
-from flaskApp.form import RegistrationForm, LoginForm, UpdateAccountForm
+from flaskApp.form import RegistrationForm, LoginForm, UpdateAccountForm, PostGrievanceForm
 from flaskApp.models import User, Grievance
 from flask_login import login_user, current_user, logout_user, login_required
 
@@ -88,3 +88,14 @@ def account():
         form.email.data = current_user.email
     image_file = url_for('static', filename='profile_pic/' + current_user.image_file)
     return render_template('account.html', title='Account', image_file=image_file, form=form)
+
+
+
+@app.route("/post_grievance/new", methods=['GET', 'POST'])
+@login_required
+def new():
+    form = PostGrievanceForm()
+    if form.validate_on_submit():
+        flash('Your Grievance has been Sumbitted')
+        return redirect(url_for('home'))
+    return render_template('create_grievance.html', title='New Grievance', form=form)

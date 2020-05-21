@@ -17,13 +17,14 @@ class User(db.Model, UserMixin):
     def __repr__(self):
         return f"User('{self.username}', '{self.email}', '{self.image_file}')"
 
-class Grievance(db.Model):
+class Grievance(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
-    category = db.Column(db.String(20), nullable=False)
-    date_posted = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
-    grievance = db.Column(db.Text, nullable=False)
+    category_grievance = db.Column(db.String(20), nullable=False)
+    title = db.Column(db.String(20), nullable=False)
+    content = db.Column(db.Text, nullable=False)
     grievance_image_file = db.Column(db.String(20), nullable=False, default='default.jpg')
+    date_posted = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     used_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
 
     def __repr__(self):
-        return f"Post('{self.category}', '{self.date_posted}', '{self.grievance_image_file})"
+        return f"Grievance('{self.category_grievance}', '{self.title}', '{self.content}', '{self.grievance_image_file}, '{self.date_posted}')"

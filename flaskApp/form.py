@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileAllowed
 from flask_login import current_user
-from wtforms import StringField, PasswordField, SubmitField, BooleanField
+from wtforms import StringField, PasswordField, SubmitField, BooleanField, TextAreaField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
 from flaskApp.models import User
 
@@ -67,3 +67,10 @@ class UpdateAccountForm(FlaskForm):
             if email:
                 raise ValidationError('The Email is already taken. Please choose another Email.')
 
+
+class PostGrievanceForm(FlaskForm):
+    category_grievance = StringField('Grievance Category', validators=[DataRequired()])
+    title = StringField('Title', validators=[DataRequired()])
+    content = TextAreaField('Content', validators=[DataRequired()])
+    grievance_picture = FileField('Uplaod Image', validators=[FileAllowed(['jpg', 'png'])])
+    submit = SubmitField('Post')
