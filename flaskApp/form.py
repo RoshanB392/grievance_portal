@@ -72,5 +72,5 @@ class PostGrievanceForm(FlaskForm):
     category_grievance = StringField('Grievance Category', validators=[DataRequired()])
     title = StringField('Title', validators=[DataRequired()])
     content = TextAreaField('Content', validators=[DataRequired()])
-    grievance_image_file = FileField('Uplaod Image', validators=[FileAllowed(['jpg', 'png'])])
+    grievance_picture = FileField('Uplaod Image', validators=[FileAllowed(['jpg', 'png'])])
     submit = SubmitField('Post')

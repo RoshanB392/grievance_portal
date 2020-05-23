@@ -96,6 +96,6 @@ def account():
 def new():
     form = PostGrievanceForm()
     if form.validate_on_submit():
-        flash('Your Grievance has been Sumbitted')
+        flash('Your Grievance has been Sumbitted', 'success')
         return redirect(url_for('home'))
     return render_template('create_grievance.html', title='New Grievance', form=form)
