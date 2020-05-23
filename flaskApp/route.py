@@ -14,7 +14,7 @@ def home():
 
 @app.route("/about")
 def about():
-    return render_template('about.html')
+    return render_template('about.html', title='About')
 
 
 @app.route("/register", methods=['GET', 'POST'])
@@ -91,7 +91,7 @@ def account():
 
 
 
-@app.route("/post_grievance/new", methods=['GET', 'POST'])
+@app.route("/create_grievance", methods=['GET', 'POST'])
 @login_required
 def new():
     form = PostGrievanceForm()
