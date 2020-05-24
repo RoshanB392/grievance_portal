@@ -6,10 +6,11 @@
         <article class="media content-section">
           <div class="media-body">
             <div class="article-metadata">
-              <a class="mr-2" href="#">{{ post.category_grievance }}</a>
-              <small class="text-muted">{{ post.date_posted }}</small>
+              <a class="mr-2" href="#">{{ post.author.username }}</a>
+              <small class="text-muted">{{ post.date_posted.strftime('%d-%m-%Y') }}</small>
             </div>
-            <h2><a class="article-title" href="#">{{ post.title }}</a></h2>
+            <h4><a class="article-title" href="#">Category: {{ post.category_grievance }}</a></h4>
+            <h5><a class="article-title" href="#">Title: {{ post.title }}</a></h5>
             <p class="article-content">{{ post.content }}</p>
           </div>
         </article>
