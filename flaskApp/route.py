@@ -101,9 +101,9 @@ def save_grievance_picture(form_picture):
     return picture_fn
 
 
-@app.route("/create_grievance", methods=['GET', 'POST'])
+@app.route("/grievance/new", methods=['GET', 'POST'])
 @login_required
-def new():
+def new_grievance():
     form = PostGrievanceForm()
     if form.validate_on_submit():
         if form.grievance_picture.data:
