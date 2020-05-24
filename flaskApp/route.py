@@ -116,3 +116,9 @@ def new_grievance():
         grievance_image_file = url_for('static', filename='grievance_pic/' + current_user.grievance_image_file)
         return redirect(url_for('home'))
     return render_template('create_grievance.html', title='New Grievance', form=form)
+
+
+@app.route("/grievance/<int:grievance_id>")
+def grievance(grievance_id):
+    grievance = Grievance.query.get_or_404(grievance_id)
+    return render_template('grievance.html', title=grievance.title, grievance=grievance)

@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+    <article class="media content-section">
+        <img class="rounded-circle article-img" src="{{ url_for('static', filename='profile_pic/' + grievance.author.image_file) }}">
+        <div class="media-body">
+        <div class="article-metadata">
+            <a class="mr-2" href="#">{{ grievance.author.username }}</a>
+            <small class="text-muted">{{ grievance.date_posted.strftime('%d-%m-%Y') }}</small>
+        </div>
+        <h4>Title: {{ grievance.title }}</h4>
+        <h5>Category: {{ grievance.category_grievance }}</h5>
+        <p class="article-content">{{ grievance.content }}</p>
+        </div>
+    </article>
+    
+{% endblock content %}
