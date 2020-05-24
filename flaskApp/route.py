@@ -10,7 +10,8 @@ from flask_login import login_user, current_user, logout_user, login_required
 @app.route("/")
 @app.route("/home")
 def home():
-    grievances = Grievance.query.all()
+    page = request.args.get('page', 1, type=int)
+    grievances = Grievance.query.order_by(Grievance.date_posted.desc()).paginate(page=page, per_page=3)
     return render_template('home.html', grievances=grievances)
 
 @app.route("/about")
@@ -158,3 +159,13 @@ def grievance_delete(grievance_id):
     db.session.commit()
     flash('Your Grievance has been deleted!', 'success')
     return redirect(url_for('home'))
+
+
+@app.route("/user/<string:username>")
+def user_grievances(username):
+    page = request.args.get('page', 1, type=int)
+    user = User.query.filter_by(username=username).first_or_404()
+    grievances = Grievance.query.filter_by(author=user)\
+        .order_by(Grievance.date_posted.desc())\
+        .paginate(page=page, per_page=3)
+    return render_template('user_grievances.html', grievances=grievances, user=user)
