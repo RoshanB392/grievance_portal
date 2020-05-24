@@ -10,7 +10,8 @@ from flask_login import login_user, current_user, logout_user, login_required
 @app.route("/")
 @app.route("/home")
 def home():
-    return render_template('layout.html')
+    grievances = Grievance.query.all()
+    return render_template('home.html', grievances=grievances)
 
 @app.route("/about")
 def about():
@@ -90,12 +91,28 @@ def account():
     return render_template('account.html', title='Account', image_file=image_file, form=form)
 
 
+def save_grievance_picture(form_picture):
+    random_hex = secrets.token_hex(8)
+    f_name, f_ext = os.path.splitext(form_picture.filename)
+    picture_fn = random_hex + f_ext
+    picture_path = os.path.join(app.root_path, 'static/grievance_pic', picture_fn)
+    form_picture.save(picture_path)
+    
+    return picture_fn
+
 
 @app.route("/create_grievance", methods=['GET', 'POST'])
 @login_required
 def new():
     form = PostGrievanceForm()
     if form.validate_on_submit():
+        if form.grievance_picture.data:
+            grievance_picture_file = save_grievance_picture(form.grievance_picture.data) 
+            current_user.grievance_image_file = grievance_picture_file
+        grievance = Grievance(category_grievance=form.category_grievance.data, title=form.title.data, content=form.content.data, author=current_user)
+        db.session.add(grievance)
+        db.session.commit()
         flash('Your Grievance has been Sumbitted', 'success')
+        grievance_image_file = url_for('static', filename='grievance_pic/' + current_user.grievance_image_file)
         return redirect(url_for('home'))
     return render_template('create_grievance.html', title='New Grievance', form=form)
