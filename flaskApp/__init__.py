@@ -20,8 +20,6 @@ app.config['MAIL_USER_TLS'] = True
 # app.config['MAIL_USERNAME'] = os.environ.get('EMAIL_USER')
 # app.config['MAIL_PASSWORD'] = os.environ.get('EMAIL_PASS')
 
-app.config['MAIL_USERNAME'] = 'robinbond2k18@gmail.com'
-app.config['MAIL_PASSWORD'] = 'r0bin@2k18'
 mail = Mail(app)
 
 
