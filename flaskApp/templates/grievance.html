@@ -10,7 +10,7 @@
             <small class="text-muted">{{ grievance.date_posted.strftime('%d-%m-%Y') }}</small>
             {% if grievance.author == current_user %}
                 <div>
-                    <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{{ url_for('grievance_update', grievance_id=grievance.id) }}">Update</a>
+                    <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{{ url_for('users.grievance_update', grievance_id=grievance.id) }}">Update</a>
                     <button type="button" class="btn btn-danger btn-sm m-1" data-toggle="modal" data-target="#deleteModal">Delete</button>
                 </div>
             {% endif %}
@@ -32,7 +32,7 @@
             </div>
             <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <form action="{{ url_for('grievance_delete', grievance_id=grievance.id) }}" method="POST">
+            <form action="{{ url_for('grievances.grievance_delete', grievance_id=grievance.id) }}" method="POST">
                 <input class="btn btn-danger" type="submit" value="Delete">
             </form>
             </div>

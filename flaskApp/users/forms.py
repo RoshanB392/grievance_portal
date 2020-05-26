@@ -1,23 +1,21 @@
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileAllowed
 from flask_login import current_user
-from wtforms import StringField, PasswordField, SubmitField, BooleanField, TextAreaField
+from wtforms import StringField, PasswordField, SubmitField, BooleanField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
-from flaskApp.models import User, Grievance
+from flaskApp.models import User
+
+
 
 # Registration Form
 class RegistrationForm(FlaskForm):
     username = StringField('Username',
-     validators=[DataRequired(), Length(min=5, max=20)])
-
+                            validators=[DataRequired(), Length(min=5, max=20)])
     email = StringField('Email',
-     validators=[DataRequired(), Email()])
-
+                        validators=[DataRequired(), Email()])
     password = PasswordField('Password', validators=[DataRequired()])
-
-    confirm_password = PasswordField('Confirm Password', 
-     validators=[DataRequired(), EqualTo('password')])
-
+    confirm_password = PasswordField('Confirm Password',
+                                    validators=[DataRequired(), EqualTo('password')])
     submit = SubmitField('Sign Up')
 
     def validate_username(self, username):
@@ -33,26 +31,21 @@ class RegistrationForm(FlaskForm):
 # Login Form
 class LoginForm(FlaskForm):
     email = StringField('Email',
-     validators=[DataRequired(), Email()])
-
-    password = PasswordField('Password', 
-     validators=[DataRequired()])
-    
+                        validators=[DataRequired(), Email()])
+    password = PasswordField('Password',
+                        validators=[DataRequired()])
     remember = BooleanField('Remember Me')
-
     submit = SubmitField('Login')
 
 
 # Update Account Form
 class UpdateAccountForm(FlaskForm):
     username = StringField('Username',
-     validators=[DataRequired(), Length(min=5, max=20)])
-
+                            validators=[DataRequired(), Length(min=5, max=20)])
     email = StringField('Email',
-     validators=[DataRequired(), Email()])
-
-    picture = FileField('Update Profile Picture', validators=[FileAllowed(['jpg', 'png'])])
-
+                        validators=[DataRequired(), Email()])
+    picture = FileField('Update Profile Picture',
+                        validators=[FileAllowed(['jpg', 'png'])])
     submit = SubmitField('Update')
 
     def validate_username(self, username):
@@ -67,13 +60,6 @@ class UpdateAccountForm(FlaskForm):
             if email:
                 raise ValidationError('The Email is already taken. Please choose another Email.')
 
-
-class PostGrievanceForm(FlaskForm):
-    category_grievance = StringField('Grievance Category', validators=[DataRequired()])
-    title = StringField('Title', validators=[DataRequired()])
-    content = TextAreaField('Content', validators=[DataRequired()])
-    grievance_picture = FileField('Uplaod Image', validators=[FileAllowed(['jpg', 'png'])])
-    submit = SubmitField('Post')
 
 class RequestResetForm(FlaskForm):
     email = StringField('Email',
