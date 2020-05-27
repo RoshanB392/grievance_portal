@@ -1,6 +1,6 @@
 from flask import render_template, flash, redirect, url_for, request, abort, Blueprint
 from flaskApp.models import Grievance
-from flaskApp import app, bcrypt , db
+from flaskApp import bcrypt , db
 from flaskApp.grievances.forms import PostGrievanceForm
 from flaskApp.grievances.utils import save_grievance_picture
 from flask_login import current_user, login_required
