@@ -27,11 +27,9 @@ def create_app(config_class=Config):
     from flaskApp.users.routes import users
     from flaskApp.grievances.routes import grievances
     from flaskApp.main.routes import main
-    from flaskApp.errors.handlers import errors
 
     app.register_blueprint(users)
     app.register_blueprint(grievances)
     app.register_blueprint(main)
-    app.register_blueprint(errors)
     
     return app
